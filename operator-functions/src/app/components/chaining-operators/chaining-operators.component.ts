@@ -17,6 +17,7 @@ export class ChainingOperatorsComponent {
   public tapInitalData: number[] = [] as number[];
   public mapInitalData: number[] = [] as number[];
   public filterInitalData: number[] = [] as number[];
+  public finalData: number[] = [] as number[];
 
   public data$: Observable<number> = this._dataService.dataStream$.pipe(
     tap((elem) => {
@@ -41,7 +42,7 @@ export class ChainingOperatorsComponent {
        */
       this.mapInitalData.push(elem);
 
-      return elem * 2;
+      return elem * 3;
     }),
     filter((elem) => {
       /**
@@ -56,6 +57,9 @@ export class ChainingOperatorsComponent {
       this.filterInitalData.push(elem);
 
       return elem % 2 == 0;
+    }),
+    tap((elem) => {
+      this.finalData.push(elem);
     })
   );
 
